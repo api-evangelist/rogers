@@ -1,0 +1,77 @@
+aid: rogers
+url: https://raw.githubusercontent.com/api-evangelist/rogers/refs/heads/main/apis.yml
+name: Rogers Communications
+kind: company
+description: >-
+  Rogers Communications is Canada's largest wireless carrier and, following its 2023 acquisition of Shaw
+  Communications, one of the country's largest cable, internet, and media companies. It operates a national
+  5G mobile network, broadband and TV services under the Rogers, Fido, chatr, and Shaw/Ignite brands, and
+  owns Rogers Sports & Media. In the telecom API value chain Rogers sits squarely on the network-operator
+  side, not the developer-facing side: it has no first-party developer portal, publishes no OpenAPI or
+  Swagger definitions, runs no sandbox, and ships no first-party SDKs. Its legacy developer programme,
+  Rogers Catalyst, is dead — www.rogers.com/developer still 301s to a meta-refresh page pointing at
+  rogerscatalyst.com, a domain that no longer belongs to Rogers (re-registered through NameCheap with
+  registrant privacy in December 2023) and that now serves a one-byte blank page. Rogers' network
+  capabilities reach developers only through intermediaries: EnStream LP, the identity and fraud joint
+  venture it co-owns with Bell Mobility and TELUS, which resells Canadian carrier Number Verification and
+  SIM Swap data on a sales-led, contract-first basis with no public documentation; Aduna, the
+  Ericsson-and-carrier joint venture that announced an EnStream partnership in February 2025 to bring
+  Bell, Rogers, and TELUS network APIs onto a CAMARA-aligned platform; and, historically, a
+  Canada-exclusive private preview of Microsoft's Azure Programmable Connectivity announced at MWC 2023,
+  whose public documentation has since been retired. Rogers is partner-gated and reachable only through
+  aggregators — the CAMARA posture is real but wholesale, and nothing is callable from a Rogers-owned
+  domain.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Telecommunications
+- Canada
+- Mobile Network Operator
+- Broadband
+- 5G
+- Network APIs
+- CAMARA
+- Identity Verification
+- SIM Swap
+- IoT
+- Media
+created: '2026-07-25'
+modified: '2026-07-25'
+specificationVersion: '0.19'
+apis:
+- aid: rogers:rogers-control-centre-iot-api
+  name: Rogers Control Centre IoT APIs
+  description: >-
+    Rogers Control Centre is Rogers' managed IoT and M2M connectivity management platform, a white-labelled
+    deployment of Cisco IoT Control Center (formerly Jasper). Rogers' own product pages list "Access to
+    applicable REST APIs" and "Access to applicable REST and SOAP APIs" as tier features, so the API surface
+    is real and named by Rogers — but Rogers publishes no endpoint reference, no OpenAPI, and no sandbox of
+    its own. The underlying REST, SOAP, and PUSH API functions are documented by Cisco on Cisco DevNet, and a
+    live Rogers tenant requires an existing Rogers Business contract plus platform credentials. Authentication
+    on the Cisco platform is an API key for REST and a license key for SOAP, with a shared secret used to
+    validate incoming PUSH callbacks. Access is customer-gated; there is no self-serve signup.
+  humanURL: https://www.rogers.com/business/iot/control-centre
+  tags:
+  - IoT
+  - M2M
+  - Connectivity Management
+  - SIM Lifecycle
+  - Canada
+  properties:
+  - type: Documentation
+    url: https://www.rogers.com/business/iot/control-centre
+  - type: Documentation
+    url: https://www.rogers.com/business/blog/en/optimize-and-scale-your-iot-solutions-with-rogers-control-centre
+  - type: APIReference
+    url: https://developer.cisco.com/docs/control-center/rest-api-functions/
+common:
+- type: Website
+  url: https://www.rogers.com/
+- type: Website
+  url: https://about.rogers.com/
+- type: Documentation
+  url: https://www.rogers.com/business/iot
+- type: LinkedIn
+  url: https://www.linkedin.com/company/rogers-communications
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

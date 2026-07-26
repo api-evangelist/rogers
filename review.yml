@@ -1,0 +1,342 @@
+aid: rogers
+name: Rogers Communications
+review:
+  question: Does Rogers Communications expose a real, self-serve public developer/API surface, and what is its CAMARA / GSMA Open Gateway posture?
+  answer: false
+  date: '2026-07-25'
+  reviewer: API Evangelist
+  homeMarket: Canada
+  tier: mno-carrier
+  gated: true
+findings:
+  summary: |
+    Rogers Communications has no first-party developer portal, no public API reference, no
+    downloadable OpenAPI or Swagger, no sandbox, and no first-party SDKs. Its legacy developer
+    programme is not merely abandoned — it is a dangling redirect. https://www.rogers.com/developer
+    returns 301 to /developer/, which returns 200 serving a bare HTML meta-refresh to
+    http://www.rogerscatalyst.com. That host does not resolve in DNS. The apex, rogerscatalyst.com,
+    resolves to 91.99.149.59 (Hetzner, Germany) and returns HTTP 200 with a Content-Length of 1
+    byte. WHOIS shows the domain was created 2023-12-12 through NameCheap with registrant
+    organization "Privacy service provided by Withheld for Privacy ehf" — it is no longer a Rogers
+    domain, and Rogers' own website still points customers at it.
+
+    developer.rogers.com, developers.rogers.com, docs.rogers.com, apis.rogers.com,
+    opengateway.rogers.com, developers.opengateway.rogers.com, and developer.rogers.ca all fail DNS
+    resolution (curl exit 6 / code 000). api.rogers.com resolves and returns HTTP 200, but it is not
+    an API host — it serves the AngularJS consumer marketing shell with
+    <link rel="canonical" href="http://www.rogers.com/consumer/home">. www.rogers.com/api and
+    www.rogers.com/opengateway both 404 to the site's real /404 page.
+
+    The one genuine Rogers API surface is Rogers Control Centre, its managed IoT/M2M connectivity
+    platform — a white-labelled deployment of Cisco IoT Control Center (formerly Jasper). Rogers'
+    own product content lists "Access to applicable REST APIs" and "Access to applicable REST and
+    SOAP APIs" as tier features. Rogers documents no endpoints itself; the REST, SOAP, and PUSH API
+    functions are documented by Cisco on Cisco DevNet, and a live tenant requires a Rogers Business
+    contract and platform credentials.
+
+    Rogers is the textbook case for this sector's central finding: a large carrier whose network
+    capabilities reach developers only through intermediaries, never from a Rogers-owned domain.
+  camaraPosture: >-
+    Real but wholesale and indirect — Rogers exposes CAMARA-defined capabilities only through
+    EnStream (the Bell/Rogers/TELUS identity joint venture) and its February 2025 Aduna partnership;
+    nothing CAMARA is callable, documented, or even named on any Rogers-owned domain.
+  camaraApis:
+  - Number Verification
+  - SIM Swap
+  camaraApisEvidence: |
+    Number Verification and SIM Swap are the two CAMARA APIs named in the Ericsson/Aduna press
+    release of 2025-02-27 announcing the Aduna–EnStream partnership, which states that the
+    collaboration "will enable seamless access to telecom network APIs from Bell, Rogers, and
+    TELUS." EnStream LP is explicitly described on its own site as a joint venture of "Bell Mobility,
+    Rogers Communications and TELUS Communications." Coverage cited is "full nationwide coverage
+    exceeding 90 percent."
+
+    Caveat recorded honestly: the Ericsson release uses forward-looking language — EnStream's APIs
+    "will be integrated into Aduna's platform." As of this review, Aduna's own operator page
+    (adunaglobal.com) lists Airtel, AT&T, Deutsche Telekom, KDDI, Orange, Reliance Jio, Singtel,
+    T-Mobile, Telefónica, Telstra, Verizon, and Vodafone — and does not name Canada, Rogers, Bell,
+    TELUS, or EnStream. EnStream's own site (enstream.com, HTTP 200) markets Verify / Authenticate /
+    Protect, names the three carrier owners, and mentions neither CAMARA nor Open Gateway anywhere;
+    enstream.com/developers, /api, and /docs all 404, and developer.enstream.com and
+    docs.enstream.com do not resolve. There is no public API reference, sandbox, or self-serve
+    signup anywhere in this chain.
+  openGateway:
+    memberConfirmed: false
+    note: >-
+      No GSMA Open Gateway MoU signature by Rogers could be confirmed. The GSMA supporters and
+      "which operators are supporting Open Gateway" pages return HTTP 403 to both WebFetch and curl,
+      so the authoritative roster could not be read. Rogers publishes no Open Gateway page of its
+      own (www.rogers.com/opengateway → 404; opengateway.rogers.com does not resolve). Rogers is
+      named in third-party coverage as an operator partner in Microsoft's Azure Programmable
+      Connectivity ecosystem alongside AT&T, BT, Claro, Deutsche Telekom, Orange, MEO, Singtel,
+      T-Mobile, Telefónica, TIM Brasil, Verizon, and Vivo — APC is a CAMARA-based aggregation
+      gateway — but that is a Microsoft channel, not a Rogers Open Gateway commitment. Recorded as
+      unconfirmed rather than false-by-assertion.
+  microsoftAzureProgrammableConnectivity:
+    announced: '2023-02-28'
+    source: https://about.rogers.com/news-ideas/rogers-partners-with-microsoft-to-drive-development-of-made-in-canada-5g-applications/
+    verbatim: >-
+      "select Canadian developers will gain secure access to a location-based API on Rogers' national
+      5G network, so they can build applications that will locate their devices anytime, anywhere."
+    status: >-
+      Private preview, exclusive to Canada, announced at MWC 2023 with IoT partner CloudHawk. The
+      Rogers announcement names neither CAMARA nor GSMA Open Gateway. As of this review Microsoft's
+      Azure Programmable Connectivity documentation has been retired — both
+      learn.microsoft.com/en-us/azure/programmable-connectivity/ and its overview page 301 away to
+      microsoft.com/en-us/ai/telecommunications. This channel is a press release with no surviving
+      public documentation.
+  tmForum:
+    conformanceCertified: unknown
+    note: >-
+      No TM Forum Open API conformance certification was found in Rogers' name. TM Forum's public
+      material describes 470+ certified implementations across 50 companies but the searchable
+      results surfaced no Rogers entry, and TM Forum's certification directory was not retrievable
+      anonymously. Rogers is a known API-management operator internally — Broadcom/CA publishes a
+      customer case study titled "Rogers Communications Elevates the Customer Experience with
+      Enhanced API Management and App Testing Capabilities" — but that is internal BSS/OSS estate,
+      not a published or certified Open API surface.
+  threeGppExposure:
+    nef: false
+    scef: false
+    networkSlicing: false
+    edgeMec: false
+    note: >-
+      No NEF or SCEF surface, no network-slicing API, and no edge/MEC API is published or documented
+      by Rogers. The only edge-adjacent artifact found is the retired Azure Programmable Connectivity
+      private preview described above.
+  authModel:
+    firstPartyOAuth: false
+    ciba: false
+    note: >-
+      No first-party auth surface exists. https://www.rogers.com/.well-known/openid-configuration,
+      https://api.rogers.com/.well-known/openid-configuration, and
+      https://www.rogers.com/.well-known/oauth-authorization-server all return HTTP 404. CIBA
+      (Client-Initiated Backchannel Authentication), the authorization pattern CAMARA specifies for
+      network-based authorization, does not appear anywhere on a Rogers property. The only concrete
+      auth model documented for a Rogers-branded API belongs to the underlying Cisco IoT Control
+      Center platform: an API key for the REST API, a license key for the SOAP API, and a shared
+      secret used to sign and validate inbound PUSH API callbacks.
+  webhooks:
+    published: false
+    asyncapi: false
+    note: >-
+      Rogers publishes no event catalog and no AsyncAPI. The Cisco IoT Control Center PUSH API is a
+      real callback mechanism available to Control Centre customers, documented by Cisco rather than
+      by Rogers.
+  sdks:
+    firstParty: false
+    note: >-
+      No first-party SDK packages were found on npm, PyPI, Maven, or NuGet. Two similarly named
+      packages exist and are explicitly NOT Rogers: npm "rogers" is a Marvel API wrapper published
+      by an unrelated individual (github.com/paulohp/rogers.js), and PyPI "rogers-api" is described
+      by its own author as an "Unofficial Python wrapper for Rogers Bank credit card data"
+      (github.com/diogobas/rogers-api). PyPI "rogers" is a malware-similarity tool, unrelated.
+  githubOrganization:
+    confirmed: false
+    note: >-
+      No verifiable Rogers GitHub organization. github.com/Rogers-Communications (created
+      2015-01-27) and github.com/RogersCommunications (created 2018-08-15) both return HTTP 200 from
+      the API but have 0 public repositories, no name, no description, no blog, and no location —
+      unverifiable placeholders. github.com/rogers is an unrelated personal account. None is claimed
+      here as Rogers' org.
+  postman:
+    publicWorkspace: false
+    note: A public Postman network search for "rogers communications" returned no matching workspace or collection.
+  graphql:
+    published: false
+    note: https://www.rogers.com/graphql and https://api.rogers.com/graphql both return HTTP 404. No SDL to introspect or save.
+  grpc:
+    published: false
+    note: No published .proto files were found.
+  channelToDevelopers: >-
+    Aggregator-only. Rogers reaches developers through EnStream (carrier-owned identity JV,
+    sales-led, no docs), Aduna (announced Feb 2025, Canada not yet on Aduna's public operator
+    roster), and formerly Microsoft Azure Programmable Connectivity (private preview, docs retired).
+    Nothing is callable from a Rogers-owned domain.
+probes:
+  - url: https://developer.rogers.com
+    status: '000'
+    note: DNS does not resolve (getaddrinfo ENOTFOUND).
+  - url: https://developers.rogers.com
+    status: '000'
+    note: DNS does not resolve (getaddrinfo ENOTFOUND).
+  - url: https://docs.rogers.com
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://apis.rogers.com
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://developer.rogers.ca
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://opengateway.rogers.com
+    status: '000'
+    note: DNS does not resolve. No carrier Open Gateway subdomain exists.
+  - url: https://developers.opengateway.rogers.com
+    status: '000'
+    note: DNS does not resolve. Telefónica-style pattern probed and absent.
+  - url: https://api.rogers.com
+    status: '200'
+    note: Resolves, but serves the consumer marketing SPA shell; canonical is http://www.rogers.com/consumer/home. Not an API host.
+  - url: https://www.rogers.com/developer
+    status: '301'
+    note: 301 to /developer/ which returns 200 and serves an HTML meta-refresh to http://www.rogerscatalyst.com. Dangling legacy developer programme.
+  - url: https://www.rogers.com/developers
+    status: '200'
+    note: Identical meta-refresh page to http://www.rogerscatalyst.com.
+  - url: http://www.rogerscatalyst.com
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://rogerscatalyst.com
+    status: '200'
+    note: >-
+      Content-Length 1, Apache/2.4.62 (AlmaLinux), IP 91.99.149.59 (Hetzner, DE). WHOIS creation date
+      2023-12-12, registrar NameCheap, registrant "Privacy service provided by Withheld for Privacy
+      ehf". Not a Rogers-controlled domain.
+  - url: https://www.rogers.com/api
+    status: '404'
+    note: Redirects to the site's real /404 page.
+  - url: https://www.rogers.com/opengateway
+    status: '404'
+    note: Redirects to the site's real /404 page.
+  - url: https://www.rogers.com/business/api
+    status: '200'
+    note: Redirects to https://www.rogers.com/business — no API content.
+  - url: https://www.rogers.com/openapi.json
+    status: '404'
+  - url: https://www.rogers.com/openapi.yaml
+    status: '404'
+  - url: https://www.rogers.com/swagger.json
+    status: '404'
+  - url: https://www.rogers.com/api-docs
+    status: '404'
+  - url: https://www.rogers.com/spec
+    status: '404'
+  - url: https://api.rogers.com/openapi.json
+    status: '404'
+  - url: https://api.rogers.com/swagger.json
+    status: '404'
+  - url: https://api.rogers.com/api-docs
+    status: '404'
+  - url: https://api.rogers.com/v1/openapi.json
+    status: '404'
+  - url: https://www.rogers.com/.well-known/openid-configuration
+    status: '404'
+  - url: https://api.rogers.com/.well-known/openid-configuration
+    status: '404'
+  - url: https://www.rogers.com/.well-known/oauth-authorization-server
+    status: '404'
+  - url: https://www.rogers.com/graphql
+    status: '404'
+  - url: https://api.rogers.com/graphql
+    status: '404'
+  - url: https://www.rogers.com/robots.txt
+    status: '200'
+    note: Real robots.txt; sitemap at https://www.rogers.com/sitemap.xml. No developer or API paths allowed or disallowed.
+  - url: https://www.rogers.com/business/iot
+    status: '200'
+    note: Rogers Business IoT solutions landing page.
+  - url: https://www.rogers.com/business/iot/control-centre
+    status: '200'
+    note: Rogers Control Centre product page — the only Rogers-owned page describing a Rogers API surface.
+  - url: https://www.rogers.com/business/blog/en/optimize-and-scale-your-iot-solutions-with-rogers-control-centre
+    status: '200'
+    note: >-
+      Rogers Business blog post listing "Access to applicable REST APIs" and "Access to applicable
+      REST and SOAP APIs" as Control Centre tier features. No link to API documentation is provided.
+  - url: https://developer.cisco.com/docs/control-center/rest-api-functions/
+    status: '200'
+    note: Cisco DevNet REST API function reference for the platform behind Rogers Control Centre. Cisco's documentation, not Rogers'.
+  - url: https://enstream.com/
+    status: '200'
+    note: >-
+      EnStream LP, the Bell/Rogers/TELUS identity JV. Markets Verify / Authenticate / Protect. Names
+      the three carrier owners. Mentions neither CAMARA nor Open Gateway. No API reference, sandbox,
+      or self-serve signup.
+  - url: https://enstream.com/developers
+    status: '404'
+  - url: https://enstream.com/api
+    status: '404'
+  - url: https://enstream.com/docs
+    status: '404'
+  - url: https://developer.enstream.com
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://docs.enstream.com
+    status: '000'
+    note: DNS does not resolve.
+  - url: https://www.adunaglobal.com/
+    status: '200'
+    note: Aduna operator list does not name Canada, Rogers, Bell, TELUS, or EnStream as of this review.
+  - url: https://aduna.global
+    status: '000'
+    note: DNS does not resolve; the live Aduna domain is adunaglobal.com.
+  - url: https://www.gsma.com/solutions-and-impact/gsma-open-gateway/gsma-open-gateway-supporters/
+    status: '403'
+    note: GSMA blocks anonymous fetches; the authoritative Open Gateway supporter roster could not be read.
+  - url: https://www.gsma.com/solutions-and-impact/gsma-open-gateway/which-mobile-operators-are-supporting-open-gateway/
+    status: '403'
+    note: Same block.
+  - url: https://learn.microsoft.com/en-us/azure/programmable-connectivity/azure-programmable-connectivity-overview
+    status: '301'
+    note: Redirects to https://www.microsoft.com/en-us/ai/telecommunications. Azure Programmable Connectivity documentation has been retired.
+transports:
+  - protocol: REST
+    scheme: https
+    documented: false
+    note: >-
+      Rogers Control Centre exposes a REST API to contracted customers. Endpoints are documented by
+      Cisco on Cisco DevNet, not by Rogers, and require an API key plus a live tenant.
+  - protocol: SOAP
+    scheme: https
+    documented: false
+    note: Cisco IoT Control Center SOAP API, license-key authenticated, available to Control Centre Advantage tier customers.
+  - protocol: Webhook
+    scheme: https
+    documented: false
+    note: Cisco IoT Control Center PUSH API callbacks, validated with a shared secret. No Rogers-published event catalog.
+  - protocol: GraphQL
+    documented: false
+    note: No GraphQL surface. /graphql returns 404 on both www.rogers.com and api.rogers.com.
+  - protocol: gRPC
+    documented: false
+    note: No published .proto files.
+  - protocol: WebSocket
+    documented: false
+    note: None documented.
+sources:
+  - url: https://www.rogers.com/developer
+    type: Probe
+    note: 301 to /developer/ serving a meta-refresh to the lapsed rogerscatalyst.com domain.
+  - url: https://www.rogers.com/business/iot/control-centre
+    type: Documentation
+    note: Rogers Control Centre product page.
+  - url: https://www.rogers.com/business/blog/en/optimize-and-scale-your-iot-solutions-with-rogers-control-centre
+    type: Documentation
+    note: Names REST and SOAP API access as tier features.
+  - url: https://developer.cisco.com/docs/control-center/rest-api-functions/
+    type: APIReference
+    note: Cisco DevNet reference for the underlying IoT Control Center platform.
+  - url: https://www.ericsson.com/en/press-releases/2025/2/aduna-and-enstream-partner-to-unlock-canadas-telecom-network-apis-for-global-innovation
+    type: PressRelease
+    note: >-
+      2025-02-27. Names Bell, Rogers, TELUS and the CAMARA APIs Number Verification and SIM Swap
+      Protection. Forward-looking language — EnStream's APIs "will be integrated into Aduna's
+      platform."
+  - url: https://enstream.com/
+    type: Website
+    note: EnStream LP, the Bell/Rogers/TELUS joint venture; the actual channel for Rogers network identity data.
+  - url: https://about.rogers.com/news-ideas/rogers-partners-with-microsoft-to-drive-development-of-made-in-canada-5g-applications/
+    type: PressRelease
+    note: 2023-02-28. Azure Programmable Connectivity private preview, location API on Rogers' 5G network. CAMARA not named.
+  - url: https://www.adunaglobal.com/
+    type: Website
+    note: Aduna operator roster; Canada and Rogers absent as of this review.
+actions:
+  openapiHarvested: false
+  specsCount: 0
+  openapiDirectoryCreated: false
+  reason: >-
+    No parseable OpenAPI, Swagger, AsyncAPI, GraphQL SDL, or .proto artifact is published on any
+    Rogers-owned host. Every spec path probed returned 404 and every developer subdomain failed DNS.
+    Nothing was fabricated and no third-party specification was imported into this repository.
