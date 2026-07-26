@@ -1,0 +1,64 @@
+generated: '2026-07-25'
+method: searched
+source: https://developer.cisco.com/docs/control-center/rest-api-troubleshooting-checklist/
+applies_to: Rogers Control Centre (Cisco IoT Control Center REST API)
+format: proprietary-json
+rfc9457: false
+envelope:
+  fields:
+  - name: errorMessage
+    description: Human-readable error description.
+  - name: errorCode
+    description: Numeric platform error code, returned as a string. Absent on some pre-authentication failures.
+  example: '{"errorMessage":"Invalid credentials","errorCode":"10000001"}'
+  docs_quote: >-
+    "Control Center returns a JSON-formatted response that contains a human-readable error message and
+    an error code."
+note: >-
+  Rogers publishes no error reference. The catalogue below is what Cisco documents for the platform
+  behind Rogers Control Centre plus what was observed live against the Jasper REST tier on 2026-07-25.
+  Per-function error lists live in the Cisco documentation for each API function; only verified entries
+  are recorded here.
+errors:
+- code: '10000001'
+  status: 401
+  message: Invalid credentials
+  meaning: The API credentials are invalid.
+  remediation: >-
+    Confirm the user name and API key, that they are colon-joined and Base64 encoded, and that the
+    Authorization header is prefixed with "Basic ". Each Control Center user has a unique API key.
+  evidence:
+    kind: live-probe
+    request: 'GET https://restapi1.jasper.com/rws/api/v1/devices with an invalid Basic credential'
+    date: '2026-07-25'
+- status: 401
+  message: Full authentication is required to access this resource
+  meaning: The request carried no Authorization header.
+  remediation: Send HTTP Basic credentials; the REST API is HTTPS-only and never anonymous.
+  evidence:
+    kind: live-probe
+    request: GET https://restapi1.jasper.com/rws/api/v1/devices (no Authorization header)
+    date: '2026-07-25'
+- status: 404
+  message: HTML error page
+  meaning: >-
+    Requests to /rws/api/* on the Rogers tenant console host (rogers.jasper.com) return the Control
+    Center provisioning application's HTML 404, not a JSON error — the REST tier is served from the
+    pod's REST host, not from the console host.
+  evidence:
+    kind: live-probe
+    request: GET https://rogers.jasper.com/rws/api/v1/devices
+    date: '2026-07-25'
+- status: 405
+  message: Method Not Allowed
+  meaning: >-
+    GET against any path under https://rogers.jasper.com/ws/service/ — the SOAP servlet mount accepts
+    POST only. Returned for both real and invented service names, so it confirms the mount, not a
+    specific service.
+  evidence:
+    kind: live-probe
+    date: '2026-07-25'
+troubleshooting_guidance:
+  - Use HTTPS; the REST APIs do not support plain HTTP.
+  - Verify the correct pod/host URL from the Control Center Knowledge Base.
+  - Keep to one active call at a time and no more than 5 calls per second.

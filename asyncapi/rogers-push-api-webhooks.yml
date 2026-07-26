@@ -1,0 +1,33 @@
+generated: '2026-07-25'
+method: searched
+source: https://developer.cisco.com/docs/control-center/
+spec_type: none
+asyncapi_published: false
+rogers_published: false
+summary: >-
+  Rogers Communications publishes no AsyncAPI document and no event catalog. A real callback surface
+  nonetheless exists for Rogers Control Centre customers: the Cisco IoT Control Center PUSH API, a
+  platform capability documented by Cisco, not by Rogers. Because Rogers neither advertises nor
+  documents it, no Webhooks or AsyncAPI pointer is wired into apis.yml — this file records the surface
+  as verified-but-third-party-documented so a future round can upgrade it if Rogers ever names it.
+event_surface:
+  name: Cisco IoT Control Center PUSH API
+  owner: Cisco Systems
+  available_to: Rogers Control Centre customers with web-interface access
+  transport: HTTPS callbacks to a customer-configured URL
+  verification: >-
+    A shared secret is configured to validate the signature of incoming requests — "for the PUSH API it
+    is necessary to configure a shared secret to validate the signature of incoming requests."
+  trigger_mechanism: >-
+    Control Center automation rules fire push notifications when configured conditions occur; the
+    callback URLs and keys are issued inside the Control Center Knowledge Base for the tenant.
+  event_catalog_public: false
+  note: >-
+    Individual event/notification types are documented per-tenant in the Control Center Knowledge Base
+    behind authentication. Nothing was enumerated anonymously and nothing has been invented here.
+probes:
+- url: https://www.rogers.com/asyncapi.yaml
+  status: 404
+- url: https://www.rogers.com/business/iot/control-centre
+  status: 200
+  note: Rogers' own product page names REST and SOAP API access; it does not mention PUSH, callbacks or webhooks.

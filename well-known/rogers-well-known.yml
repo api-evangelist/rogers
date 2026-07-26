@@ -1,0 +1,52 @@
+generated: '2026-07-25'
+method: probed
+source: live HTTP probes of every Rogers-owned host in apis.yml plus the Rogers Control Centre tenant host
+summary: >-
+  No /.well-known/ discovery document of any kind is published on any Rogers-owned host, nor on the
+  Rogers tenant of the Cisco IoT Control Center platform. Every probe below returned 404 (or the host
+  does not resolve). Recorded as verified-absent evidence; no WellKnown pointer is wired into apis.yml
+  because there is no catalog to point at.
+hosts:
+- host: https://www.rogers.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/change-password
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /robots.txt
+    status: 200
+    note: Real robots.txt with a sitemap reference; no developer or API paths.
+- host: https://about.rogers.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: https://api.rogers.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+    note: >-
+      api.rogers.com resolves but is not an API host — it serves the consumer marketing SPA shell
+      canonicalised to http://www.rogers.com/consumer/home.
+- host: https://rogers.jasper.com
+  note: >-
+    The Rogers tenant of the Cisco IoT Control Center platform (the system behind Rogers Control
+    Centre). Cisco-operated infrastructure carrying the Rogers tenant name, not a Rogers-owned domain.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404

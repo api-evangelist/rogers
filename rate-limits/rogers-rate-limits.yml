@@ -1,0 +1,32 @@
+generated: '2026-07-25'
+method: searched
+source: https://developer.cisco.com/docs/control-center/getting-started/
+docs: https://developer.cisco.com/docs/control-center/rest-api-troubleshooting-checklist/
+applies_to: Rogers Control Centre (Cisco IoT Control Center REST API)
+note: >-
+  Rogers publishes no rate-limit policy. These are the platform limits Cisco documents for the IoT
+  Control Center REST API that Rogers white-labels as Rogers Control Centre — the constraints a Rogers
+  Control Centre customer actually codes against. They are documented prose, not response headers: no
+  RateLimit/X-RateLimit headers or 429 semantics are published, and none were observed on live probes.
+headers_signalled: false
+rate_limits:
+- name: requests-per-second
+  limit_count: 5
+  limit_interval: second
+  scope: API user
+  quote: '"Do not exceed 5 calls per second."'
+- name: concurrent-calls
+  limit_count: 1
+  limit_interval: concurrent
+  scope: API user
+  quote: '"Limit the number of active calls to one at a time and avoid concurrent API processing."'
+- name: page-size
+  limit_count: 50
+  limit_interval: request
+  scope: response records
+  quote: '"Page size is limited to 50 records."'
+- name: polling-cadence
+  limit_count: 1
+  limit_interval: minute
+  scope: small-data API polling
+  quote: '"Polling of small-data APIs can occur once per minute, if necessary."'

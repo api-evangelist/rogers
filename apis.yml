@@ -18,9 +18,12 @@ description: >-
   Ericsson-and-carrier joint venture that announced an EnStream partnership in February 2025 to bring
   Bell, Rogers, and TELUS network APIs onto a CAMARA-aligned platform; and, historically, a
   Canada-exclusive private preview of Microsoft's Azure Programmable Connectivity announced at MWC 2023,
-  whose public documentation has since been retired. Rogers is partner-gated and reachable only through
-  aggregators — the CAMARA posture is real but wholesale, and nothing is callable from a Rogers-owned
-  domain.
+  whose public documentation has since been retired. On 2026-06-30 Vonage commercially launched SIM Swap
+  Detection and Silent Authentication across Canada, connecting to Bell, Rogers and TELUS via Aduna's
+  integration with EnStream — the first documented, self-serve way to buy Rogers-derived network signals,
+  though the contract, docs and sandbox all belong to Vonage. Rogers is partner-gated and reachable only
+  through aggregators — the CAMARA posture is real but wholesale, and nothing is callable from a
+  Rogers-owned domain.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Telecommunications
@@ -50,6 +53,7 @@ apis:
     on the Cisco platform is an API key for REST and a license key for SOAP, with a shared secret used to
     validate incoming PUSH callbacks. Access is customer-gated; there is no self-serve signup.
   humanURL: https://www.rogers.com/business/iot/control-centre
+  baseURL: https://rogers.jasper.com/
   tags:
   - IoT
   - M2M
@@ -63,7 +67,23 @@ apis:
     url: https://www.rogers.com/business/blog/en/optimize-and-scale-your-iot-solutions-with-rogers-control-centre
   - type: APIReference
     url: https://developer.cisco.com/docs/control-center/rest-api-functions/
+  - type: GettingStarted
+    url: https://developer.cisco.com/docs/control-center/getting-started/
+  - type: Console
+    url: https://rogers.jasper.com/provision
+  - type: Authentication
+    url: authentication/rogers-authentication.yml
+  - type: Conventions
+    url: conventions/rogers-conventions.yml
+  - type: ErrorCatalog
+    url: errors/rogers-error-codes.yml
+  - type: RateLimits
+    url: rate-limits/rogers-rate-limits.yml
+  - type: Plans
+    url: plans/rogers-plans.yml
 common:
+- type: DomainSecurity
+  url: security/rogers-domain-security.yml
 - type: Website
   url: https://www.rogers.com/
 - type: Website
@@ -72,6 +92,32 @@ common:
   url: https://www.rogers.com/business/iot
 - type: LinkedIn
   url: https://www.linkedin.com/company/rogers-communications
+- type: Lifecycle
+  url: lifecycle/rogers-lifecycle.yml
+- type: StatusPage
+  url: https://www.rogers.com/support/outage
+- type: Conformance
+  url: conformance/rogers-conformance.yml
+- type: Packages
+  url: packages/rogers-packages.yml
+- type: LLMsTxt
+  url: llms/rogers-llms.txt
+- type: Blog
+  url: https://www.rogers.com/business/blog
+- type: Support
+  url: https://www.rogers.com/support
+- type: Support
+  url: https://www.rogers.com/business/support
+- type: Login
+  url: https://www.rogers.com/consumer/profile/signin
+- type: Pricing
+  url: https://www.rogers.com/business/wireless/plans
+- type: TermsOfService
+  url: https://www.rogers.com/support/terms/rogers-terms-of-service-acceptable-use-policy-and-privacy-policy
+- type: PrivacyPolicy
+  url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+- type: News
+  url: https://about.rogers.com/news-ideas/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

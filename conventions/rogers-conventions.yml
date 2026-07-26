@@ -1,0 +1,68 @@
+generated: '2026-07-25'
+method: searched
+source: https://developer.cisco.com/docs/control-center/getting-started/
+applies_to: Rogers Control Centre (Cisco IoT Control Center platform, white-labelled by Rogers)
+note: >-
+  Rogers documents none of these conventions itself. Every rule below is published by Cisco for the
+  IoT Control Center platform that Rogers resells as Rogers Control Centre, or was observed live
+  against the Jasper REST tier on 2026-07-25. Captured here because it is the operating contract a
+  Rogers Control Centre customer actually codes against.
+authentication:
+  style: HTTP Basic (username + API key)
+  transport: HTTPS only
+  detail: authentication/rogers-authentication.yml
+media_type:
+  request: application/json
+  response: application/json
+  charset: ISO-8859-1 (observed on live error responses)
+versioning:
+  scheme: uri-path
+  current: v1
+  pattern: /rws/api/v1/{resource}
+  observed: 'GET https://restapi1.jasper.com/rws/api/v1/devices → 401 (endpoint live, credentials required)'
+  policy_published: false
+pagination:
+  style: page-number
+  request_params:
+  - name: pageSize
+    default: 50
+    maximum: 50
+  - name: pageNumber
+    default: 1
+  response_fields:
+  - pageNumber
+  - lastPage
+sparse_fieldsets:
+  supported: true
+  param: fields
+  detail: >-
+    Most GET functions accept a `fields=` parameter taking a comma-separated list of field names with
+    no spaces, returning a partial response.
+rate_limiting:
+  documented: true
+  signalled_in_headers: false
+  rules:
+  - Limit active calls to one at a time; avoid concurrent API processing.
+  - Do not exceed 5 calls (transactions) per second.
+  - Page size is limited to 50 records.
+  - Polling of small-data APIs may occur once per minute without performance impact.
+  detail: rate-limits/rogers-rate-limits.yml
+error_envelope:
+  format: proprietary-json
+  rfc9457: false
+  shape:
+    errorMessage: human-readable description
+    errorCode: numeric platform error code (string)
+  detail: errors/rogers-error-codes.yml
+idempotency:
+  supported: false
+  note: >-
+    No idempotency key, no request-replay contract, and no retry-safety guidance is documented for the
+    REST, SOAP or PUSH interfaces. No Idempotency pointer is wired into apis.yml.
+request_tracing:
+  request_id_header: none documented
+callbacks:
+  push_api: true
+  verification: shared secret used to validate the signature of inbound requests
+  catalog_published_by_rogers: false
+  detail: asyncapi/rogers-push-api-webhooks.yml

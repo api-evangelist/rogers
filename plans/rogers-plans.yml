@@ -1,0 +1,43 @@
+generated: '2026-07-25'
+method: searched
+source: https://www.rogers.com/business/blog/en/optimize-and-scale-your-iot-solutions-with-rogers-control-centre
+docs: https://www.rogers.com/business/iot/control-centre
+product: Rogers Control Centre
+pricing_published: false
+pricing_note: >-
+  Rogers publishes no price for any Control Centre tier. Access is contract-first and sales-led — a
+  Rogers Business agreement plus platform credentials. The tier feature lists below are quoted from
+  Rogers' own business blog post, which is also the only Rogers-owned page that names the API surface.
+plans:
+- name: Rogers Control Centre Lite
+  api_access: Access to applicable REST APIs
+  features:
+  - SIM lifecycle management
+  - SIM ordering
+  - Access to applicable REST APIs
+  - Analytics
+  - Immediate rate plan changes
+  - IP address range restriction
+- name: Rogers Control Centre Essential
+  api_access: Access to applicable REST APIs
+  features:
+  - SIM lifecycle management
+  - SIM ordering
+  - Access to applicable REST APIs
+  - Analytics
+  - IP address range restriction
+  - Diagnostics
+  - Authorized Device access (IMEI whitelisting)
+- name: Rogers Control Centre Advantage
+  api_access: Access to applicable REST and SOAP APIs
+  features:
+  - SIM lifecycle management
+  - SIM ordering
+  - Access to applicable REST and SOAP APIs
+  - Analytics
+  - Immediate rate plan changes
+  - IP address range restriction
+  - Diagnostics
+  - Authorized Device access (IMEI whitelisting)
+  - Platform access security feature (IP Address Range Restrictions)
+  - Advanced automation

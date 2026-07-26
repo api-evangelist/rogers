@@ -1,0 +1,67 @@
+generated: '2026-07-25'
+method: searched
+source: https://developer.cisco.com/docs/control-center/getting-started/
+docs: https://developer.cisco.com/docs/control-center/rest-api-troubleshooting-checklist/
+summary:
+  types: [http]
+  http_schemes: [basic]
+  api_key_in: [password]
+  oauth2_flows: []
+  first_party_oauth: false
+  openid_connect: false
+note: >-
+  Rogers publishes no authentication documentation of its own and operates no first-party OAuth or
+  OpenID Connect surface — https://www.rogers.com/.well-known/openid-configuration,
+  https://api.rogers.com/.well-known/openid-configuration and
+  https://www.rogers.com/.well-known/oauth-authorization-server all return 404, and CIBA (the
+  authorization pattern CAMARA specifies for network-based authorization) appears nowhere on a Rogers
+  property. The only concrete auth model for a Rogers-branded API belongs to the Cisco IoT Control
+  Center platform that Rogers white-labels as Rogers Control Centre. That model was confirmed live
+  against the Jasper REST tier during this round.
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  interface: REST
+  credential: username + API key, colon-joined and Base64 encoded in the Authorization header
+  transport: HTTPS only (the REST APIs do not support plain HTTP)
+  realm: Jasper
+  evidence:
+  - kind: live-probe
+    request: GET https://restapi1.jasper.com/rws/api/v1/devices
+    status: 401
+    header: 'WWW-Authenticate: Basic realm="Jasper"'
+    body: '{"errorMessage":"Full authentication is required to access this resource"}'
+    date: '2026-07-25'
+  - kind: docs
+    url: https://developer.cisco.com/docs/control-center/getting-started/
+    quote: >-
+      "concatenate the user name and API key (separated by a colon) ... encrypt the resulting string
+      using Base64 ... set the authorization header value to 'Basic' followed by the encoded string."
+- name: licenseKey
+  type: apiKey
+  interface: SOAP
+  credential: platform license key
+  note: >-
+    Cisco IoT Control Center SOAP API authentication. Rogers lists "Access to applicable REST and SOAP
+    APIs" as a Rogers Control Centre Advantage tier feature. The SOAP servlet mount is live on the
+    Rogers tenant host — every path under https://rogers.jasper.com/ws/service/ answers HTTP 405 to a
+    GET, consistent with a POST-only SOAP endpoint (a nonexistent service name answers 405 as well, so
+    individual service names could not be enumerated anonymously).
+- name: sharedSecret
+  type: signature
+  interface: PUSH (callbacks)
+  credential: shared secret used to sign and validate inbound callback requests
+  note: >-
+    Cisco IoT Control Center PUSH API callbacks. Cisco documents that "for the PUSH API it is necessary
+    to configure a shared secret to validate the signature of incoming requests." Rogers publishes no
+    event catalog of its own.
+onboarding:
+  self_serve: false
+  note: >-
+    No self-serve signup exists anywhere in the chain. API credentials are issued inside the Control
+    Centre console to customers with an existing Rogers Business contract; the console login for the
+    Rogers tenant is https://rogers.jasper.com/provision (HTTP 200, Cisco Control Center login).
+    Cisco separately offers a time-reserved DevNet sandbox for the platform
+    (https://rws-jpotest.jasper.com/rws/api/) with credentials mailed on reservation — that is a Cisco
+    DevNet facility, not a Rogers sandbox.

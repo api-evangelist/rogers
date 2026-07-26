@@ -1,0 +1,37 @@
+generated: '2026-07-25'
+method: searched
+source: npm, PyPI, Maven Central, NuGet, RubyGems, pkg.go.dev registry searches plus Rogers' own web properties
+summary: >-
+  Rogers Communications publishes no first-party client libraries in any public package registry.
+  Rogers has no developer portal, no SDK page, and no verifiable GitHub organization from which a
+  package could originate. The packages below are namesake packages published by unrelated third
+  parties and are recorded ONLY so they are never mistaken for Rogers artifacts. No `SDKs` pointer is
+  wired into apis.yml because no official SDK exists.
+packages: []
+official_count: 0
+namesakes:
+- language: javascript
+  registry: npm
+  name: rogers
+  url: https://www.npmjs.com/package/rogers
+  official: false
+  note: A Marvel API wrapper published by an unrelated individual (github.com/paulohp/rogers.js). Not Rogers Communications.
+- language: python
+  registry: pypi
+  name: rogers-api
+  url: https://pypi.org/project/rogers-api/
+  official: false
+  note: >-
+    Described by its own author as an "Unofficial Python wrapper for Rogers Bank credit card data"
+    (github.com/diogobas/rogers-api). Not published or endorsed by Rogers.
+- language: python
+  registry: pypi
+  name: rogers
+  url: https://pypi.org/project/rogers/
+  official: false
+  note: A malware-similarity analysis tool. Unrelated to Rogers Communications.
+platform_note: >-
+  Customers of Rogers Control Centre integrate against the Cisco IoT Control Center platform. Cisco
+  publishes code samples on Cisco Code Exchange (e.g. santosh811/control-center-code-samples,
+  cfalcken/cisco-iot-control-center) rather than a versioned first-party SDK, and those are Cisco
+  community artifacts, not Rogers packages.

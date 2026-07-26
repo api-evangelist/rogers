@@ -1,0 +1,45 @@
+generated: '2026-07-25'
+method: searched
+source: live probes of Rogers-owned hosts plus https://developer.cisco.com/docs/control-center/
+versioning:
+  scheme: uri-path
+  current: v1
+  pattern: /rws/api/v1/{resource}
+  owner: Cisco (IoT Control Center platform)
+  policy_published_by_rogers: false
+  note: >-
+    Rogers publishes no API versioning policy. The version path is a property of the Cisco platform
+    behind Rogers Control Centre and was observed live (GET /rws/api/v1/devices → 401 with the Jasper
+    Basic realm).
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No deprecation policy, no RFC 8594 Sunset/Deprecation header support, and no API changelog is
+    published by Rogers. No Deprecation pointer is wired into apis.yml because no policy exists.
+status_page:
+  url: https://www.rogers.com/support/outage
+  kind: network-service-status
+  note: >-
+    Rogers' network outage page reports Internet, TV, Home Phone and Mobile service status by region
+    for both Rogers and Rogers-together-with-Shaw footprints. It is a consumer/business NETWORK status
+    page — there is no API status page, and Rogers Control Centre platform status is not reported here.
+sla:
+  url: null
+  uptime_target: null
+  note: No published API SLA. Service commitments live inside Rogers Business contracts.
+retired_surfaces:
+- name: Rogers Catalyst developer programme
+  status: dead
+  evidence: >-
+    https://www.rogers.com/developer 301s to /developer/, which serves an HTML meta-refresh to
+    http://www.rogerscatalyst.com. That host does not resolve; the apex rogerscatalyst.com was
+    re-registered 2023-12-12 through NameCheap under registrant privacy and serves a 1-byte page from
+    Hetzner in Germany. Rogers still points customers at a domain it no longer controls.
+- name: Microsoft Azure Programmable Connectivity (Canada private preview)
+  status: documentation-retired
+  announced: '2023-02-28'
+  evidence: >-
+    learn.microsoft.com/en-us/azure/programmable-connectivity/ 301s to
+    microsoft.com/en-us/ai/telecommunications. The Rogers announcement survives; the documentation does not.
+deprecated_operations: []

@@ -1,0 +1,116 @@
+generated: '2026-07-25'
+method: searched
+source: live probes of Rogers-owned hosts, Cisco IoT Control Center documentation, and dated third-party press coverage
+summary: >-
+  Rogers Communications conforms to no published API standard on any Rogers-owned domain. Its only
+  standards-relevant posture is indirect and wholesale: CAMARA-defined network capabilities are
+  distributed by EnStream — the Bell/Rogers/TELUS identity joint venture — through Aduna and, since
+  mid-2026, through Aduna's CPaaS channel partners. Nothing CAMARA is documented, named, or callable
+  from a Rogers domain.
+standards:
+- id: camara
+  conforms: false
+  scope: rogers-owned-surface
+  evidence: >-
+    CAMARA is not named on any Rogers property. https://www.rogers.com/opengateway → 404;
+    opengateway.rogers.com and developers.opengateway.rogers.com do not resolve. Rogers network
+    capabilities reach CAMARA only through EnStream/Aduna (see distribution below).
+- id: gsma-open-gateway
+  conforms: unknown
+  evidence: >-
+    No Rogers MoU signature could be confirmed. The GSMA supporters and "which operators are
+    supporting Open Gateway" pages return HTTP 403 to anonymous fetches, so the authoritative roster
+    could not be read. Recorded as unconfirmed rather than false-by-assertion.
+- id: oauth2
+  conforms: false
+  evidence: >-
+    No OAuth 2.0 surface. /.well-known/oauth-authorization-server → 404 on www.rogers.com; the only
+    documented auth for a Rogers-branded API is HTTP Basic on the Cisco platform.
+- id: openid-connect
+  conforms: false
+  evidence: /.well-known/openid-configuration → 404 on both www.rogers.com and api.rogers.com.
+- id: oidc-ciba
+  conforms: false
+  evidence: >-
+    CIBA — the authorization pattern CAMARA specifies for network-based authorization — appears
+    nowhere on a Rogers property.
+- id: rfc7617-http-basic
+  conforms: true
+  evidence: >-
+    'WWW-Authenticate: Basic realm="Jasper"' observed live on the Cisco IoT Control Center REST tier
+    behind Rogers Control Centre (2026-07-25).
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    The platform error envelope is a proprietary {"errorMessage","errorCode"} JSON object, not
+    application/problem+json. See errors/rogers-error-codes.yml.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt → 404 on www.rogers.com, about.rogers.com, api.rogers.com and rogers.jasper.com.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No deprecation policy or Sunset/Deprecation header support is published.
+- id: openapi
+  conforms: false
+  evidence: >-
+    No OpenAPI, Swagger, AsyncAPI, GraphQL SDL or .proto is published on any Rogers-owned host. Every
+    spec path probed returns 404 and every developer subdomain fails DNS.
+- id: tmforum-open-api
+  conforms: unknown
+  evidence: >-
+    No TM Forum Open API conformance certification was found in Rogers' name; TM Forum's certification
+    directory was not retrievable anonymously. Rogers is a known internal API-management operator
+    (Broadcom/CA customer case study) but that is BSS/OSS estate, not a certified public surface.
+- id: 3gpp-nef
+  conforms: false
+  evidence: No NEF/SCEF surface, network-slicing API, or edge/MEC API is published or documented by Rogers.
+compliance_program:
+  published: false
+  certifications: []
+  note: >-
+    No trust centre, no certification page, and no named SOC 2 / ISO 27001 / PCI DSS posture was found
+    on any Rogers property (trust./security./compliance probes returned nothing). No Compliance or
+    TrustCenter pointer is wired into apis.yml.
+distribution:
+  model: wholesale-via-aggregator
+  note: >-
+    Rogers' CAMARA-defined capabilities are sold by intermediaries. This is the live channel, recorded
+    with dates and sources rather than asserted.
+  channels:
+  - name: EnStream LP
+    role: Bell/Rogers/TELUS identity and fraud joint venture; the unified gateway for Canadian telco data
+    url: https://enstream.com/
+    self_serve: false
+    public_api_reference: false
+    note: >-
+      Markets Verify / Authenticate / Protect, names its three carrier owners, and mentions neither
+      CAMARA nor Open Gateway. enstream.com/developers, /api and /docs all 404;
+      developer.enstream.com and docs.enstream.com do not resolve.
+  - name: Aduna
+    role: Ericsson-and-carrier network API venture; announced an EnStream partnership 2025-02-27
+    url: https://www.adunaglobal.com/
+    apis: [Number Verification, SIM Swap]
+    source: https://www.ericsson.com/en/press-releases/2025/2/aduna-and-enstream-partner-to-unlock-canadas-telecom-network-apis-for-global-innovation
+    caveat: >-
+      As of 2026-07-25 Aduna's own operator page still lists Airtel, AT&T, Deutsche Telekom, KDDI,
+      Orange, Reliance Jio, Singtel, T-Mobile, Telefónica, Telstra, Verizon and Vodafone — and does
+      not name Canada, Rogers, Bell, TELUS or EnStream.
+  - name: Vonage (CPaaS channel partner)
+    role: First commercially launched developer-facing channel carrying Rogers network signals
+    launched: '2026-06-30'
+    apis: [SIM Swap Detection, Silent Authentication]
+    sources:
+    - https://www.vonage.com/about-us/newsroom/press-releases/Vonage-Launches-Network-Powered-Solutions-for-Fraud-Prevention-Across-Canada/20ad8fcc-1c1d-4777-9315-ccc0168df71a/
+    - https://www.thefastmode.com/technology-solutions/49410-vonage-launches-network-powered-fraud-prevention-solutions-across-canada
+    quote: >-
+      "connecting to Canadian carriers via Aduna's integration with EnStream, a joint venture of Bell,
+      Rogers and TELUS – Canada's trusted mobile identity and network-data consortium."
+    note: >-
+      New since the 2026-07-25 provider review, which recorded the Aduna channel as announced but not
+      yet visible. A developer can now buy Rogers-derived SIM Swap and Silent Authentication signals
+      through a documented, self-serve CPaaS — but the contract, docs and sandbox are Vonage's. Still
+      nothing callable from a Rogers-owned domain.
+  - name: Microsoft Azure Programmable Connectivity
+    role: Retired channel — Canada-exclusive private preview announced 2023-02-28
+    status: documentation-retired
+    source: https://about.rogers.com/news-ideas/rogers-partners-with-microsoft-to-drive-development-of-made-in-canada-5g-applications/
