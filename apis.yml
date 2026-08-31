@@ -69,6 +69,12 @@ apis:
   - IoT
   - M2M
   - Connectivity Management
+  - SIM LifeCycle
+  - Canada
+  tags_raw:
+  - IoT
+  - M2M
+  - Connectivity Management
   - SIM Lifecycle
   - Canada
   properties:
