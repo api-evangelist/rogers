@@ -114,6 +114,10 @@ apis:
   - type: Plans
     url: plans/rogers-plans.yml
 common:
+- type: Plans
+  url: plans/rogers-plans.yml
+- type: RateLimits
+  url: rate-limits/rogers-rate-limits.yml
 - type: DomainSecurity
   url: security/rogers-domain-security.yml
 - type: Website
