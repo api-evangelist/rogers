@@ -41,3 +41,27 @@ plans:
   - Authorized Device access (IMEI whitelisting)
   - Platform access security feature (IP Address Range Restrictions)
   - Advanced automation
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Rogers Control Centre Lite
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Rogers Control Centre Essential
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Rogers Control Centre Advantage
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
