@@ -68,6 +68,39 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-compliance-assurance.py
   first_seen: '2026-10-20'
+- partner_name: PeeringDB (interconnection register)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.peeringdb.com/net/307
+  category: network interconnection register
+  contract_reference:
+    register: PeeringDB (peeringdb.com/api net, ix, fac, org)
+    standard: null
+    spec_file: null
+    role: peeringdb-facility-operator+network
+    registered_name: Rogers Data Centres Inc.
+    register_id: https://www.peeringdb.com/net/307
+    matched_domain: rogers.com
+    matched_by: domain
+    asns:
+    - 812
+    - 3602
+    info_types:
+    - Cable/DSL/ISP
+    - NSP
+    ix_presence: 4
+    exchanges_operated: []
+    facilities_operated: 3
+    signal_note: 'participation only: PeeringDB is self-registered by network operators; ASNs, IX presence and facility
+      counts are context, never counted'
+    detected_by: sweep-network-edge.py
+    detected: '2026-10-20'
+  detected_by: sweep-network-edge.py
+  first_seen: '2026-10-20'
 generated: '2026-10-12'
 method: searched
 checked:
@@ -75,6 +108,10 @@ checked:
 - https://cloudsecurityalliance.org/star/registry
 - https://eucoc.cloud/en/public-register/list-of-adherent-services
 - https://raw.githubusercontent.com/camaraproject/camara-landscape/main/landscape.yml
+- https://manrs.org/netops/participants/
+- https://www.peeringdb.com/api/fac
+- https://www.peeringdb.com/api/ix
+- https://www.peeringdb.com/api/net
 marketplace_apps: []
 source:
 - https://cloudsecurityalliance.org/star/registry
