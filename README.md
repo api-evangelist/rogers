@@ -1,4 +1,4 @@
-# Rogers Communications (rogers)
+# Rogers Communications
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,85 +64,111 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Rogers Communications is Canada's largest wireless carrier and, following its 2023 acquisition of Shaw Communications, one of the country's largest cable, internet, and media companies. It operates a national 5G mobile network, broadband and TV services under the Rogers, Fido, chatr, and Shaw/Ignite brands, and owns Rogers Sports & Media. In the telecom API value chain Rogers sits on the network-operator side, not the developer-facing side: no first-party developer portal, no published OpenAPI or Swagger, no sandbox, and no first-party SDKs.
+Rogers Communications is Canada's largest wireless carrier and, following its 2023 acquisition of Shaw Communications, one of the country's largest cable, internet, and media companies. It operates a national 5G mobile network, broadband and TV services under the Rogers, Fido, chatr, and Shaw/Ignite brands, and owns Rogers Sports & Media. In the telecom API value chain Rogers sits squarely on the network-operator side, not the developer-facing side: it has no first-party developer portal, publishes no OpenAPI or Swagger definitions, runs no sandbox, and ships no first-party SDKs. Its legacy developer programme, Rogers Catalyst, is dead — www.rogers.com/developer still 301s to a meta-refresh page pointing at rogerscatalyst.com, a domain that no longer belongs to Rogers (re-registered through NameCheap with registrant privacy in December 2023) and that now serves a one-byte blank page. Rogers' network capabilities reach developers only through intermediaries: EnStream LP, the identity and fraud joint venture it co-owns with Bell Mobility and TELUS, which resells Canadian carrier Number Verification and SIM Swap data on a sales-led, contract-first basis with no public documentation; Aduna, the Ericsson-and-carrier joint venture that announced an EnStream partnership in February 2025 to bring Bell, Rogers, and TELUS network APIs onto a CAMARA-aligned platform; and, historically, a Canada-exclusive private preview of Microsoft's Azure Programmable Connectivity announced at MWC 2023, whose public documentation has since been retired. On 2026-06-30 Vonage commercially launched SIM Swap Detection and Silent Authentication across Canada, connecting to Bell, Rogers and TELUS via Aduna's integration with EnStream — the first documented, self-serve way to buy Rogers-derived network signals, though the contract, docs and sandbox all belong to Vonage. Rogers is partner-gated and reachable only through aggregators — the CAMARA posture is real but wholesale, and nothing is callable from a Rogers-owned domain.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/rogers/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/rogers/refs/heads/main/apis.yml)
+**Areas:** Telecommunications · Canada · Mobile Network Operator · Broadband · 5G · Network APIs · CAMARA · Identity Verification · SIM Swap · IoT · Media
 
-## Tags
+## Rogers Communications on APIs.io
 
-- Telecommunications
-- Canada
-- Mobile Network Operator
-- Broadband
-- 5G
-- Network APIs
-- CAMARA
-- Identity Verification
-- SIM Swap
-- IoT
-- Media
+Everything profiled for Rogers Communications is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/rogers/](https://apis.io/providers/rogers/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (1)
 
-- **Created:** 2026-07-25
-- **Modified:** 2026-07-25
+- [Rogers Control Centre IoT APIs](https://apis.io/apis/rogers/rogers-control-centre-iot-api/) — Rogers Control Centre is Rogers' managed IoT and M2M connectivity management platform, a white-labelled deployment of Cisco IoT Control Center (formerly…
 
-## APIs
+### Published properties
 
-### Rogers Control Centre IoT APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Rogers' managed IoT and M2M connectivity management platform, a white-labelled deployment of Cisco IoT Control Center (formerly Jasper). Rogers' own product content lists "Access to applicable REST APIs" and "Access to applicable REST and SOAP APIs" as tier features, so the surface is real and named by Rogers — but Rogers documents no endpoints itself. The REST, SOAP, and PUSH API functions are documented by Cisco on Cisco DevNet, and a live tenant requires a Rogers Business contract plus platform credentials. Authentication is an API key for REST, a license key for SOAP, and a shared secret used to validate inbound PUSH callbacks. Customer-gated; no self-serve signup.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://www.rogers.com/business/iot/control-centre](https://www.rogers.com/business/iot/control-centre)
+Event-driven and webhook contracts.
 
-#### Tags
+- [Rogers Push Api Webhooks](https://apis.io/asyncapis/rogers/rogers-push-api-webhooks/)
 
-- IoT
-- M2M
-- Connectivity Management
-- SIM Lifecycle
-- Canada
+#### Security (2)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://www.rogers.com/business/iot/control-centre)
-- [Documentation](https://www.rogers.com/business/blog/en/optimize-and-scale-your-iot-solutions-with-rogers-control-centre)
-- [API Reference](https://developer.cisco.com/docs/control-center/rest-api-functions/)
+- [Rogers Authentication](https://apis.io/security/rogers/rogers-authentication/)
+- [Rogers Domain Security](https://apis.io/security/rogers/rogers-domain-security/)
 
-## The Developer Programme That Is Not There
+#### Plans and pricing (1)
 
-`https://www.rogers.com/developer` returns **301** to `/developer/`, which returns **200** and serves a bare HTML meta-refresh to `http://www.rogerscatalyst.com`. That host does not resolve. The apex, `rogerscatalyst.com`, resolves to a Hetzner IP in Germany and returns 200 with a **one-byte body**; WHOIS shows it was created 2023-12-12 through NameCheap behind registrant privacy. The legacy Rogers Catalyst developer programme is gone and Rogers' own website still points at a domain it no longer controls.
+Published plans, tiers and prices.
 
-`developer.rogers.com`, `developers.rogers.com`, `docs.rogers.com`, `apis.rogers.com`, `opengateway.rogers.com`, `developers.opengateway.rogers.com`, and `developer.rogers.ca` all fail DNS resolution. `api.rogers.com` resolves and returns 200, but serves the consumer marketing SPA — its canonical is `http://www.rogers.com/consumer/home`. `www.rogers.com/api` and `www.rogers.com/opengateway` both 404.
+- [Rogers Plans](https://apis.io/plans/rogers/rogers-plans/)
 
-## CAMARA and GSMA Open Gateway Posture
+#### Rate limits (1)
 
-**Real but wholesale and indirect.** Nothing CAMARA is callable, documented, or even named on any Rogers-owned domain.
+Published request limits.
 
-- **CAMARA APIs with evidence:** Number Verification, SIM Swap — both named in the [Ericsson/Aduna press release of 2025-02-27](https://www.ericsson.com/en/press-releases/2025/2/aduna-and-enstream-partner-to-unlock-canadas-telecom-network-apis-for-global-innovation) announcing the Aduna–EnStream partnership, which states the collaboration "will enable seamless access to telecom network APIs from Bell, Rogers, and TELUS."
-- **Channel:** [EnStream LP](https://enstream.com/), the identity and fraud joint venture Rogers co-owns with Bell Mobility and TELUS. EnStream markets Verify / Authenticate / Protect, names its three carrier owners, and mentions neither CAMARA nor Open Gateway. `enstream.com/developers`, `/api`, and `/docs` all 404; `developer.enstream.com` and `docs.enstream.com` do not resolve. Sales-led, contract-first, no public documentation.
-- **A press release is not an implementation.** The Ericsson release is forward-looking — EnStream's APIs "will be integrated into Aduna's platform." As of this review, Aduna's own operator page lists Airtel, AT&T, Deutsche Telekom, KDDI, Orange, Reliance Jio, Singtel, T-Mobile, Telefónica, Telstra, Verizon, and Vodafone, and does **not** name Canada, Rogers, Bell, TELUS, or EnStream.
-- **GSMA Open Gateway:** unconfirmed. Rogers publishes no Open Gateway page, and the GSMA supporter roster returns 403 to anonymous fetches, so membership could be neither confirmed nor disproved.
-- **Microsoft Azure Programmable Connectivity:** Rogers announced a Canada-exclusive private preview at MWC on 2023-02-28 — "select Canadian developers will gain secure access to a location-based API on Rogers' national 5G network." CAMARA is not named in the Rogers announcement, and Microsoft's APC documentation has since been retired (the docs URLs 301 away to a marketing page).
+- [Rogers Rate Limits](https://apis.io/rate-limits/rogers/rogers-rate-limits/)
 
-## Other Findings
+## Where to find this API
 
-- **Auth:** no first-party auth surface. `/.well-known/openid-configuration` and `/.well-known/oauth-authorization-server` return 404 on both `www.rogers.com` and `api.rogers.com`. **CIBA does not appear anywhere on a Rogers property.**
-- **Specs:** none. Every `/openapi.json`, `/openapi.yaml`, `/swagger.json`, `/api-docs`, `/spec`, and `/v1/openapi.json` path probed returned 404. No `openapi/` directory is included in this repository.
-- **GraphQL / gRPC:** none. `/graphql` returns 404 on both hosts; no published `.proto` files.
-- **SDKs:** no first-party packages on npm, PyPI, Maven, or NuGet. npm `rogers` is an unrelated Marvel API wrapper; PyPI `rogers-api` is described by its own author as an "Unofficial Python wrapper for Rogers Bank credit card data."
-- **GitHub:** no verifiable Rogers organization. `Rogers-Communications` and `RogersCommunications` both exist with zero public repositories and no metadata; neither is claimed here.
-- **Postman:** no public workspace found.
-- **TM Forum:** no Open API conformance certification found in Rogers' name. Broadcom publishes a Rogers case study on internal API management, but that is BSS/OSS estate, not a published or certified Open API surface.
-- **3GPP exposure:** no NEF or SCEF surface, no network-slicing API, no edge/MEC API.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-## Links
+- [Website](https://www.rogers.com/)
+- [Documentation](https://www.rogers.com/business/iot)
+- [Pricing](https://www.rogers.com/business/wireless/plans)
+- [Support](https://www.rogers.com/support)
+- [Blog](https://www.rogers.com/business/blog)
+- [Terms of service](https://www.rogers.com/support/terms/rogers-terms-of-service-acceptable-use-policy-and-privacy-policy)
+- [Privacy policy](https://www.rogers.com/support/privacy/rogers-privacy-policy)
+- [Status](https://www.rogers.com/support/outage)
 
-- [Rogers Communications](https://www.rogers.com/)
-- [About Rogers](https://about.rogers.com/)
-- [Rogers Business IoT](https://www.rogers.com/business/iot)
-- [LinkedIn](https://www.linkedin.com/company/rogers-communications)
+## API Evangelist rating
 
-## Maintainers
+**Kin Score 50.5** — developing · rubric 0.25.0 · scored 2026-10-23
 
-- Kin Lane — kin@apievangelist.com
+| Facet | Score |
+|---|---|
+| Discoverability | 74.1 |
+| Contract quality | 39.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 47.4 |
+| Developer ergonomics | 51.2 |
+| Access clarity | 69.7 |
+
+**Agent readiness 25.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 25.8** — Telecommunications
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/rogers/](https://apis.io/providers/rogers/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Rogers Communications: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/rogers/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
